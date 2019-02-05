@@ -5,17 +5,13 @@ RSpec.describe Tictactoe::Player do
       expect { Tictactoe::Player.new }.to raise_error(ArgumentError)
     end
 
-    it "raises an error when given one parameter" do
-      expect { Tictactoe::Player.new("Alice") }.to raise_error(ArgumentError)
-    end
-
-    it "doesn't raise an error when given two parameters" do
-      expect { Tictactoe::Player.new("Alice", "X") }.to_not raise_error
+    it "doesn't raise an error when given a valid hash" do
+      expect { Tictactoe::Player.new({name: "Alice", marker: "X"}) }.to_not raise_error
     end
   end
 
   before do
-    @player = Tictactoe::Player.new("Alice", "X") 
+    @player = Tictactoe::Player.new({name: "Alice", marker: "X"}) 
   end
   
   context "#name" do
@@ -24,7 +20,7 @@ RSpec.describe Tictactoe::Player do
     end
 
     it "raises an error when trying to change the name" do
-      expect { @player = Tictactoe::Player.new("Alice", "X"); 
+      expect { @player = Tictactoe::Player.new({name: "Alice", marker: "X"}); 
       @player.name = "Bob" }.to raise_error(NoMethodError)
     end
   end
@@ -35,7 +31,7 @@ RSpec.describe Tictactoe::Player do
     end
 
     it "raises an error when trying to change the marker" do
-      expect { @player = Tictactoe::Player.new("Alice", "X"); 
+      expect { @player = Tictactoe::Player.new({name: "Alice", marker: "X"}); 
       @player.marker = "G" }.to raise_error(NoMethodError)    
     end
   end
